@@ -6,7 +6,10 @@
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "lint": "biome check src/",
+    "format": "biome check --write src/",
+    "prepare": "husky"
   },
   "dependencies": {
     "@shopify/flash-list": "^2.3.2",
@@ -27,8 +30,10 @@
     "zustand": "^5.0.15"
   },
   "devDependencies": {
+    "@biomejs/biome": "^2.5.10",
     "@types/react": "~19.1.0",
     "babel-preset-expo": "~54.0.10",
+    "husky": "^9.1.7",
     "typescript": "~5.9.2"
   },
   "private": true
