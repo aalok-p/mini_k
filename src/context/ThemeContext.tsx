@@ -1,5 +1,6 @@
 import type React from "react";
 import { createContext, useContext, useMemo } from "react";
+import { useCampaignMode } from "../store/appStore";
 import type { SDUITheme } from "../types/sdui";
 
 export const defaultTheme: SDUITheme = {
@@ -56,12 +57,19 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
   children,
   payloadTheme,
 }) => {
+  const activeCampaign = useCampaignMode();
+
   const theme = useMemo(() => {
     if (payloadTheme) {
       return { ...defaultTheme, ...payloadTheme };
     }
+
+    if (activeCampaign !== "none") {
+      return campaignThemes[activeCampaign];
+    }
+
     return defaultTheme;
-  }, [payloadTheme]);
+  }, [payloadTheme, activeCampaign]);
 
   return (
     <ThemeContext.Provider value={theme}>{children}</ThemeContext.Provider>
